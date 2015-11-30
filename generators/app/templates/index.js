@@ -8,7 +8,13 @@ var argv = require('yargs').argv;
 <% } %>
 
 if (argv.h || argv.help) {
-  console.log("Description goes here!");
-  console.log("-h | --help print this help message");
-  process.exit(0);
+  require("./lib/help")();
+} else {
+  try {
+    var command = argv._[0];
+    require("./lib/" + command)(argv);
+  } catch (e) {
+    console.error("Error: did not recognize options " + JSON.stringify(argv));
+    require("./lib/help")();
+  }
 }

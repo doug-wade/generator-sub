@@ -4,10 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components"
+    "node_modules"
   ],
+  "bin": {
+    "<%= name %>": "./index.js"
+  },
   "dependencies": {<% if (argParser === "minimist") { %>
     "minimist": "^1.2.0"
 <% } %><% if (argParser === "yargs") { %>
