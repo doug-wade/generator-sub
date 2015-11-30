@@ -1,0 +1,17 @@
+{
+  "name": "<%= name %>",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {<% if (argParser === "minimist") { %>
+    "minimist": "^1.2.0"
+<% } %><% if (argParser === "yargs") { %>
+    "yargs": "^3.30.0"
+<% } %>
+  }
+}

@@ -13,10 +13,15 @@ module.exports = yeoman.generators.Base.extend({
     ));
 
     var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
+      type    : 'input',
+      name    : 'name',
+      message : 'What would you like to call your cli app?',
+      default : this.appname // Default to current folder name
+    }, {
+      type: 'list',
+      name: 'argParser',
+      message: 'Which argument parser would you like to use?',
+      choices: ['yargs', 'minimist']
     }];
 
     this.prompt(prompts, function (props) {
@@ -28,10 +33,13 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: function () {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
+    var context = {
+      argParser: this.props.argParser,
+      name: this.props.name
+    };
+
+    this.template('_package.json', 'package.json', context);
+    this.template('index.js', 'index.js', context);
   },
 
   install: function () {

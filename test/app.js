@@ -13,7 +13,8 @@ describe('generator-sub:app', function () {
 
   it('creates files', function () {
     assert.file([
-      'dummyfile.txt'
+      'package.json',
+      'index.js'
     ]);
   });
 });
