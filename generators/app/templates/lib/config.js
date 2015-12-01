@@ -1,10 +1,23 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 
-var file = '/persist/config.json';
-var contents = fs.readFileSync(file);
-var config = contents || {};
+var persistenceDir = 'persist';
+var file = path.join('.', persistenceDir, 'config.json');
+var config = {};
+
+// copy-pasta from http://stackoverflow.com/questions/4482686/check-synchronously-if-file-directory-exists-in-node-js
+try {
+  var stats = fs.lstatSync(persistenceDir);
+  if (stats.isDirectory()) {
+    config = JSON.parse(fs.readFileSync(file));
+  }
+} catch (e) {
+  fs.mkdir(persistenceDir);
+  fs.writeFileSync(file, JSON.stringify({}));
+}
+
 // I don't like that this is stored partially here and partially in init.
 var keys = [
   'name'
@@ -17,11 +30,15 @@ module.exports = {
 
   saveConfig: function (newConfig) {
     config = newConfig;
-    fs.writeFileSync(file);
+    fs.writeFileSync(file, JSON.stringify(newConfig));
   },
 
   isValid: function () {
-    //var derp = ;
-    return keys.reduce((prev, curr) => prev && !!config[curr], true);
+    for (var i = 0; i < keys.length; i++) {
+      if (!config[keys[i]]) {
+        return false;
+      }
+    }
+    return true;
   }
 };

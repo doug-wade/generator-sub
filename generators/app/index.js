@@ -42,8 +42,10 @@ module.exports = yeoman.generators.Base.extend({
     this.template('index.js', 'index.js', context);
     this.template('_eslintrc', '.eslintrc', context);
     this.template('_gitignore', '.gitignore', context);
-    this.template('lib/help.js', 'lib/help.js', context);
-    this.template('lib/example.js', 'lib/example.js', context);
+    this.template('sub/help.js', 'sub/help.js', context);
+    this.template('sub/example.js', 'sub/example.js', context);
+    this.template('sub/init.js', 'sub/init.js', context);
+    this.template('lib/config.js', 'lib/config.js', context);
   },
 
   install: function () {

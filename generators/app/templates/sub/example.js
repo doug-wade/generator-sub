@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../lib/config');
+var config = require('../lib/config').getConfig();
 
 /**
  * An example command.

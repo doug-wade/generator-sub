@@ -9,7 +9,9 @@
   "bin": {
     "<%= name %>": "./index.js"
   },
-  "dependencies": {<% if (argParser === "minimist") { %>
+  "dependencies": {
+    "inquirer": "^0.11.0",
+<% if (argParser === "minimist") { %>
     "minimist": "^1.2.0"
 <% } %><% if (argParser === "yargs") { %>
     "yargs": "^3.30.0"
