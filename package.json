@@ -1,6 +1,6 @@
 {
   "name": "generator-sub",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A Yeoman generator for writing cli apps inspired by 37signals sub",
   "homepage": "http://github.com/prekolna/generator-sub",
   "author": {
