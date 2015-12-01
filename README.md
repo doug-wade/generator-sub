@@ -1,6 +1,7 @@
 # generator-sub [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > A Yeoman generator for writing cli apps inspired by 37signals sub
 
+
 ## Installation
 
 First, install [Yeoman](http://yeoman.io) and generator-sub using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
@@ -15,6 +16,7 @@ Then generate your new project:
 ```bash
 yo sub
 ```
+
 
 ## Running the generated cli app locally
 
@@ -41,6 +43,7 @@ And run the example sub command
 You ran the example command!
 ```
 
+
 ## Adding a new sub command
 
 Say you wanted to add a new subcommand, random, which prints a random number between 0 and a provided argument when invoked.  First, generate a new sub command
@@ -60,6 +63,12 @@ sub random
 Then, add your new logic inside the exported function inside lib/random.js
 
 ```javascript
+/**
+ * Returns a random number between 0 and the argument value
+ * Usage:
+ *      sub random 100
+ *      > 80.6944249663502
+ */
 module.exports = function(argv){
   console.log(Math.random()*(+argv._[1]));
 }
@@ -72,20 +81,42 @@ sub random 100
 > 80.6944249663502
 ```
 
-## TODO
-
-1. Make the tests pass
-1. Add `sub update` to update the command
-1. Add auto-updating using npm
-1. Add auto-updating using git
 
 ## Example
 
 See a sample cli app generated using this generator [here](https://github.com/prekolna/dnd-roller).
 
+
+## Inspired By
+
+This generator is Inspired [37signals sub](https://github.com/basecamp/sub).  Read more about [their pattern](http://37signals.com/svn/posts/3264-automating-with-convention-introducing-sub).
+
+
 ## Getting To Know Yeoman
 
 Yeoman has a heart of gold. He&#39;s a person with feelings and opinions, but he&#39;s very easy to work with. If you think he&#39;s too opinionated, he can be easily convinced. Feel free to [learn more about him](http://yeoman.io/).
+
+
+## Contributing
+
+Please make sure it passes eslint.
+
+    eslint .
+
+There are also tests, but they do not pass `¯\_(ツ)_/¯`.
+
+    npm test
+
+Send me a pull request!  You can put your name in the credits here if you're into that sort of thing.
+
+
+## TODO
+
+1. Make the tests pass
+1. Write a generated README
+1. Add `sub update` to update the command
+1. Add auto-updating using npm
+1. Add auto-updating using git
 
 ## License
 
