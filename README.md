@@ -75,7 +75,10 @@ sub random 100
 ## TODO
 
 1. Make the tests pass
-1. Add auto-updating from npm, git
+1. Add user-specified config
+1. Add `sub update` to update the command
+1. Add auto-updating using npm
+1. Add auto-updating using git
 
 ## Example
 
