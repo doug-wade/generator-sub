@@ -1,8 +1,12 @@
 {
-  "extends": "eslint:recommended",
   "env": {
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "blockBindings": true,
+    "arrowFunctions": true
   },
   "rules": {
     "array-bracket-spacing": [
@@ -28,10 +32,7 @@
       2,
       "nofunc"
     ],
-    "one-var": [
-      2,
-      "never"
-    ],
+    "no-var": 0,
     "quote-props": [
       2,
       "as-needed"
@@ -67,8 +68,7 @@
     "key-spacing": [
       2,
       {
-        "beforeColon": false,
-        "afterColon": true
+        "align": "colon"
       }
     ],
     "no-eval": 2,

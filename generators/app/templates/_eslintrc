@@ -4,5 +4,9 @@
   },
   "rules": {
     "no-console": 0
-  }
+  },
+  "ecmaFeatures": [
+    "blockBindings",
+    "arrowFunctions"
+  ],
 }

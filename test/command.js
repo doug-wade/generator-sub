@@ -3,7 +3,7 @@ var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 
-var testSubCommand = "random";
+var testSubCommand = 'random';
 
 describe('generator-sub:command', function () {
   before(function (done) {

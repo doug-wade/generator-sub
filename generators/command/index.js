@@ -13,10 +13,10 @@ module.exports = yeoman.generators.Base.extend({
     ));
 
     var prompts = [{
-      type    : 'input',
-      name    : 'name',
-      message : 'What would you like to call your sub command?'
-    },];
+      type   : 'input',
+      name   : 'name',
+      message: 'What would you like to call your sub command?'
+    }];
 
     this.prompt(prompts, function (props) {
       this.props = props;

@@ -1,20 +1,26 @@
 #!/usr/bin/env node
 
-"use strict";
-<% if (argParser === "minimist") { %>
-var argv = require("minimist")(process.argv.slice(2));
-<% } %><% if (argParser === "yargs") { %>
+'use strict';
+
+<% if (argParser === 'minimist') { %>
+var argv = require('minimist')(process.argv.slice(2));
+<% } %><% if (argParser === 'yargs') { %>
 var argv = require('yargs').argv;
 <% } %>
 
+var config = require('./lib/config');
+if (!config.isValid()) {
+  require('./sub/init')();
+}
+
 if (argv.h || argv.help) {
-  require("./lib/help")();
+  require('./lib/help')();
 } else {
   try {
     var command = argv._[0];
-    require("./lib/" + command)(argv);
+    require('./lib/' + command)(argv);
   } catch (e) {
-    console.error("Error: did not recognize options " + JSON.stringify(argv));
-    require("./lib/help")();
+    console.error('Error: did not recognize options ' + JSON.stringify(argv));
+    require('./lib/help')();
   }
 }
