@@ -3,7 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var libDir = path.join('.', 'sub');
+var libDir = __dirname;
 
 function getHelpText(fileName) {
   var file = fs.readFileSync(path.join(libDir, fileName)).toString();

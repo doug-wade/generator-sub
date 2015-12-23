@@ -1,6 +1,17 @@
 # generator-sub [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > A Yeoman generator for writing cli apps inspired by 37signals sub
 
+## Features
+
+#### For your users
+
+* Updating from git and npm
+* User-managed config
+* Help parsed from subcommand comments
+
+#### For you
+
+* Eslint
 
 ## Installation
 
@@ -113,10 +124,8 @@ Send me a pull request!  You can put your name in the credits here if you're int
 ## TODO
 
 1. Make the tests pass
-1. Write a generated README
-1. Add `sub update` to update the command
-1. Add auto-updating using npm
-1. Add auto-updating using git
+1. Add auto-updating on a schedule
+1. sub generator for sub command
 
 ## License
 

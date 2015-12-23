@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
+  "repository": "<%= repo %>",
   "ignore": [
     "node_modules"
   ],

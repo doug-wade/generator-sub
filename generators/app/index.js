@@ -22,6 +22,15 @@ module.exports = yeoman.generators.Base.extend({
       name   : 'argParser',
       message: 'Which argument parser would you like to use?',
       choices: ['yargs', 'minimist']
+    }, {
+      type   : 'input',
+      name   : 'repo',
+      message: 'What git repo will you be storing this in?'
+    }, {
+      type   : 'list',
+      name   : 'updater',
+      message: 'How would you like users to update their app?',
+      choices: ['git', 'npm']
     }];
 
     this.prompt(prompts, function (props) {
@@ -35,16 +44,24 @@ module.exports = yeoman.generators.Base.extend({
   writing: function () {
     var context = {
       argParser: this.props.argParser,
-      name     : this.props.name
+      name     : this.props.name,
+      repo     : this.props.repo,
+      updater  : this.props.updater
     };
 
     this.template('_package.json', 'package.json', context);
     this.template('index.js', 'index.js', context);
     this.template('_eslintrc', '.eslintrc', context);
     this.template('_gitignore', '.gitignore', context);
+    this.template('_README.md', 'README.md', context);
     this.template('sub/help.js', 'sub/help.js', context);
     this.template('sub/example.js', 'sub/example.js', context);
     this.template('sub/init.js', 'sub/init.js', context);
+    if (this.props.updater === 'git') {
+      this.template('sub/git-update.js', 'sub/update.js', context);
+    } else {
+      this.template('sub/npm-update.js', 'sub/update.js', context);
+    }
     this.template('lib/config.js', 'lib/config.js', context);
   },
 

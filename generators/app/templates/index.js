@@ -12,6 +12,7 @@ function runCommand(command) {
   try {
     require('./sub/' + command)(argv);
   } catch (e) {
+    console.error(e);
     console.error('Error: did not recognize options ' + JSON.stringify(argv));
     require('./sub/help')();
   }

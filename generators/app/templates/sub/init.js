@@ -15,7 +15,11 @@ module.exports = function (callback) {
       default: 'User',
       name   : 'name',
       message: 'Please enter your name'
-    }
+    }<% if (updater === 'git') { %>, {
+      name   : 'repo',
+      message: 'Where did you install <%= name %> (where is your git repo located)?',
+      default: ''
+    }<% } %>
   ], (answers) => {
     var tempConfig = config.getConfig();
     Object.keys(answers).forEach(function (key) {

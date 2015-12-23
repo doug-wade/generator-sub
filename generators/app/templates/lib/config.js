@@ -3,8 +3,8 @@
 var fs = require('fs');
 var path = require('path');
 
-var persistenceDir = 'persist';
-var file = path.join('.', persistenceDir, 'config.json');
+var persistenceDir = path.join(__dirname, '..', 'persist');
+var file = path.join(persistenceDir, 'config.json');
 var config = {};
 
 // copy-pasta from http://stackoverflow.com/questions/4482686/check-synchronously-if-file-directory-exists-in-node-js
@@ -20,7 +20,8 @@ try {
 
 // I don't like that this is stored partially here and partially in init.
 var keys = [
-  'name'
+  'name',
+  'repo'
 ];
 
 module.exports = {
