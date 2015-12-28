@@ -1,4 +1,6 @@
-# generator-sub [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-sub 
+[![Build Status](https://secure.travis-ci.org/doug-wade/generator-sub.svg?branch=master)](https://travis-ci.org/doug-wade/generator-sub)[![dependencies](https://david-dm.org/doug-wade/generator-sub.svg)](https://david-dm.org/doug-wade/generator-sub)[![npm version](https://badge.fury.io/js/generator-sub.svg)](https://badge.fury.io/js/generator-sub)
+
 > A Yeoman generator for writing cli apps inspired by 37signals sub
 
 ## Features
@@ -131,12 +133,5 @@ Send me a pull request!  You can put your name in the credits here if you're int
 
 MIT © [Doug Wade](dougwade.io)
 
-
-[npm-image]: https://badge.fury.io/js/generator-sub.svg
-[npm-url]: https://npmjs.org/package/generator-sub
-[travis-image]: https://travis-ci.org/prekolna/generator-sub.svg?branch=master
-[travis-url]: https://travis-ci.org/prekolna/generator-sub
-[daviddm-image]: https://david-dm.org/prekolna/generator-sub.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/prekolna/generator-sub
-[coveralls-image]: https://coveralls.io/repos/prekolna/generator-sub/badge.svg
-[coveralls-url]: https://coveralls.io/r/prekolna/generator-sub
+# Support
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/~doug-wade/)
