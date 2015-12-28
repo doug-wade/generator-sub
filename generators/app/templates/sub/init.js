@@ -20,11 +20,7 @@ module.exports = function (callback) {
       default: ''
     }<% } %>
   ], (answers) => {
-    var tempConfig = config.getConfig();
-    Object.keys(answers).forEach(function (key) {
-      tempConfig[key] = answers[key];
-    });
-    config.saveConfig(tempConfig);
+    config.updateConfig(answers);
     callback();
   });
 };

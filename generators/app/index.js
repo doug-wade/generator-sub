@@ -31,6 +31,11 @@ module.exports = yeoman.generators.Base.extend({
       name   : 'updater',
       message: 'How would you like users to update their app?',
       choices: ['git', 'npm']
+    }, {
+      type   : 'input',
+      name   : 'updateInterval',
+      message: 'At what interval would you like to prompt your users to update (in days)?',
+      default: 7
     }];
 
     this.prompt(prompts, function (props) {
@@ -43,10 +48,11 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: function () {
     var context = {
-      argParser: this.props.argParser,
-      name     : this.props.name,
-      repo     : this.props.repo,
-      updater  : this.props.updater
+      argParser     : this.props.argParser,
+      name          : this.props.name,
+      repo          : this.props.repo,
+      updater       : this.props.updater,
+      updateInterval: this.props.updateInterval
     };
 
     this.template('_package.json', 'package.json', context);
@@ -64,6 +70,7 @@ module.exports = yeoman.generators.Base.extend({
       this.template('sub/npm-update.js', 'sub/update.js', context);
     }
     this.template('lib/config.js', 'lib/config.js', context);
+    this.template('lib/persister.js', 'lib/persister.js', context);
     this.template('lib/registry.js', 'lib/registry.js', context);
   },
 

@@ -126,7 +126,7 @@ Send me a pull request!  You can put your name in the credits here if you're int
 ## TODO
 
 1. Make the tests pass
-1. Add auto-updating on a schedule
+1. zsh/bash completions
 
 ## License
 
