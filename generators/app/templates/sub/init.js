@@ -4,10 +4,9 @@ var config = require('../lib/config');
 var inquirer = require('inquirer');
 
 /**
- * Set up configuration for <%= name %>
+ * Set up configuration for <%= name %>. Runs interactive commands to walk you through setting up config.
  * Usage:
- *     sub init
- *     # Interactive commands walk you through setting config
+ *     <%= name %> init
  */
 module.exports = function (callback) {
   inquirer.prompt([

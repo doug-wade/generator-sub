@@ -5,11 +5,12 @@ var registry = require('../lib/registry');
 /**
  * Lists all commands.
  * Usage:
- *      sub commands
- *      > commands
- *      > example
- *      > init
- *      > update
+ *      <%= name %> commands
+ *          commands
+ *          example
+ *          help
+ *          init
+ *          update
  */
 module.exports = () => {
   var commands = registry.getAll();

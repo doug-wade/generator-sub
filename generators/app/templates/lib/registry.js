@@ -1,8 +1,8 @@
 'use strict';
 
 var fs = require('fs');
-var libDir = __dirname;
 var path = require('path');
+var subDir = path.join(__dirname, '..', 'sub');
 
 function getSubCommandName(fileName) {
   return path.basename(fileName, '.js');
@@ -10,7 +10,7 @@ function getSubCommandName(fileName) {
 
 module.exports = {
   getAll: function () {
-    var files = fs.readdirSync(libDir);
+    var files = fs.readdirSync(subDir);
 
     return files.map((file) => getSubCommandName(file));
   }

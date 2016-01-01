@@ -5,7 +5,7 @@ var config = require('../lib/config').getConfig();
 /**
  * An example command.
  * Usage:
- *     sub example
+ *     <%= name %> example
  *     > 'You ran the example command!'
  */
 module.exports = function () {

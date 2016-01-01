@@ -6,10 +6,10 @@ var path = require('path');
 var registry = require('../lib/registry');
 
 function getHelpText(fileName) {
-  var file = fs.readFileSync(path.join(libDir, fileName)).toString();
+  var file = fs.readFileSync(path.join(libDir, fileName + '.js')).toString();
   var lines = file.split('\n');
-  var commentCharacters = [' *', '/**', '/*', '*', '//', '*/', ' */'];
-  var escapedCommentCharacters = [' \*', '/\*', '\*', '//', ' \*/', '\*/'];
+  var commentCharacters = ['*/', ' */', ' *', '/**', '/*', '*', '//'];
+  var escapedCommentCharacters = [' \*/', '\*/', ' \*', '/\*', '\*', '//'];
 
   var helpLines = lines.filter((line) => {
     // Include any top-level comments as help text (indented comments should be excluded so you can comment on the
@@ -26,13 +26,17 @@ function getHelpText(fileName) {
   return uncommentedLines.filter((line) => !(line.replace(/\s/g, '').length < 1));
 }
 
+function getFirstLine(fileName) {
+  return getHelpText(fileName)[0];
+}
+
 /**
  * Gets help for a sub command.
  * Usage:
- *      sub help example
+ *      <%= name %> help example
  *      > An example command.
  *      > Usage:
- *      >      sub example
+ *      >      <%= name %> example
  *      >      > 'You ran the example command!'
  */
 module.exports = (argv) => {
@@ -40,7 +44,7 @@ module.exports = (argv) => {
   var helpSub = argv ? argv._[1] : undefined;
 
   if (helpSub) {
-    var subCommands = commands.filter((sub) => sub.name === helpSub);
+    var subCommands = commands.filter((sub) => sub === helpSub);
     if (subCommands.length > 0) {
       var subCommand = subCommands[0];
       var helpText = getHelpText(subCommand);
@@ -53,5 +57,5 @@ module.exports = (argv) => {
   }
 
   console.log('A simple cli application. Broken into sub commands, invoked under sub: ');
-  commands.forEach((sub) => console.log('    ' + sub.name + ': ' + sub.firstLine));
+  commands.forEach((sub) => console.log('    ' + sub + ': ' + getFirstLine(sub)));
 };
