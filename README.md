@@ -1,4 +1,4 @@
-# generator-sub 
+# generator-sub
 [![Build Status](https://secure.travis-ci.org/doug-wade/generator-sub.svg?branch=master)](https://travis-ci.org/doug-wade/generator-sub)[![dependencies](https://david-dm.org/doug-wade/generator-sub.svg)](https://david-dm.org/doug-wade/generator-sub)[![npm version](https://badge.fury.io/js/generator-sub.svg)](https://badge.fury.io/js/generator-sub)
 
 > A Yeoman generator for writing cli apps inspired by 37signals sub
@@ -127,7 +127,6 @@ Send me a pull request!  You can put your name in the credits here if you're int
 
 1. Make the tests pass
 1. Add auto-updating on a schedule
-1. sub generator for sub command
 
 ## License
 

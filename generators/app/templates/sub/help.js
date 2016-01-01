@@ -1,9 +1,9 @@
 'use strict';
 
 var fs = require('fs');
-var path = require('path');
-
 var libDir = __dirname;
+var path = require('path');
+var registry = require('../lib/registry');
 
 function getHelpText(fileName) {
   var file = fs.readFileSync(path.join(libDir, fileName)).toString();
@@ -26,24 +26,6 @@ function getHelpText(fileName) {
   return uncommentedLines.filter((line) => !(line.replace(/\s/g, '').length < 1));
 }
 
-function getSubCommandName(fileName) {
-  return path.basename(fileName, '.js');
-}
-
-function getAllSubCommands() {
-  var files = fs.readdirSync(libDir);
-
-  return files.map((file) => {
-    var helpText = getHelpText(file);
-
-    return {
-      name     : getSubCommandName(file),
-      firstLine: helpText[0],
-      helpText : helpText
-    };
-  });
-}
-
 /**
  * Gets help for a sub command.
  * Usage:
@@ -54,14 +36,15 @@ function getAllSubCommands() {
  *      >      > 'You ran the example command!'
  */
 module.exports = (argv) => {
-  var commands = getAllSubCommands();
+  var commands = registry.getAll();
   var helpSub = argv ? argv._[1] : undefined;
 
   if (helpSub) {
     var subCommands = commands.filter((sub) => sub.name === helpSub);
     if (subCommands.length > 0) {
       var subCommand = subCommands[0];
-      subCommand.helpText.forEach((line) => console.log(line));
+      var helpText = getHelpText(subCommand);
+      helpText.forEach((line) => console.log(line));
 
       return;
     } else {

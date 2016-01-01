@@ -55,6 +55,7 @@ module.exports = yeoman.generators.Base.extend({
     this.template('_gitignore', '.gitignore', context);
     this.template('_README.md', 'README.md', context);
     this.template('sub/help.js', 'sub/help.js', context);
+    this.template('sub/commands.js', 'sub/commands.js', context);
     this.template('sub/example.js', 'sub/example.js', context);
     this.template('sub/init.js', 'sub/init.js', context);
     if (this.props.updater === 'git') {
@@ -63,6 +64,7 @@ module.exports = yeoman.generators.Base.extend({
       this.template('sub/npm-update.js', 'sub/update.js', context);
     }
     this.template('lib/config.js', 'lib/config.js', context);
+    this.template('lib/registry.js', 'lib/registry.js', context);
   },
 
   install: function () {
