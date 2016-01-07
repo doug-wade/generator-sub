@@ -1,5 +1,8 @@
 # generator-sub
-[![Build Status](https://secure.travis-ci.org/doug-wade/generator-sub.svg?branch=master)](https://travis-ci.org/doug-wade/generator-sub)[![dependencies](https://david-dm.org/doug-wade/generator-sub.svg)](https://david-dm.org/doug-wade/generator-sub)[![npm version](https://badge.fury.io/js/generator-sub.svg)](https://badge.fury.io/js/generator-sub)
+[![Build Status](https://secure.travis-ci.org/doug-wade/generator-sub.svg?branch=master)](https://travis-ci.org/doug-wade/generator-sub)
+[![dependencies](https://david-dm.org/doug-wade/generator-sub.svg)](https://david-dm.org/doug-wade/generator-sub)
+[![devDependency Status](https://david-dm.org/doug-wade/generator-sub/dev-status.svg?style=flat)](https://david-dm.org/doug-wade/generator-sub#info=devDependencies)
+[![npm version](https://badge.fury.io/js/generator-sub.svg)](https://badge.fury.io/js/generator-sub)
 
 > A Yeoman generator for writing cli apps inspired by 37signals sub
 
