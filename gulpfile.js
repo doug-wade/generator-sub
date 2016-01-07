@@ -10,14 +10,12 @@ var plumber = require('gulp-plumber');
 var coveralls = require('gulp-coveralls');
 
 gulp.task('static', function () {
-  // TODO: Istanbul can't parse the lodash template and horks with an
-  // Parsing error: Unexpected token %.  Build a temp application
-  // and run Istanbul and eslint over it.
-  // return gulp.src('**/*.js')
-  //   .pipe(excludeGitignore())
-  //   .pipe(eslint())
-  //   .pipe(eslint.format())
-  //   .pipe(eslint.failAfterError());
+  // TODO: This is duplicated in eslintignore
+  return gulp.src(['**/*.js', '!generators/app/templates/index.js', '!generators/app/templates/sub/init.js'])
+    .pipe(excludeGitignore())
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('nsp', function (cb) {

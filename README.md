@@ -5,15 +5,25 @@
 
 ## Features
 
-#### For your users
+#### Commands
 
-* Updating from git and npm
+Here's the commands `sub` comes with out of the box
+
+```bash
+A simple cli application. Broken into sub commands, invoked under sub:
+    commands:  Lists all commands.
+    example:  An example command.
+    help:  Gets help for a sub command.
+    init:  Set up configuration for example-sub. Runs interactive commands to walk you through setting up config.
+    update:  Updates example-sub by pulling the most recent commit from the master branch of the remote git repository.
+```
+
+#### But wait there's more
+
+* Updating from git or npm
 * User-managed config
 * Help parsed from subcommand comments
 
-#### For you
-
-* Eslint
 
 ## Installation
 
@@ -112,21 +122,12 @@ Yeoman has a heart of gold. He&#39;s a person with feelings and opinions, but he
 
 ## Contributing
 
-Please make sure it passes eslint.
-
-    eslint .
-
-There are also tests, but they do not pass `¯\_(ツ)_/¯`.
+Please make sure it passes static analysis and the unit tests
 
     npm test
 
-Send me a pull request!  You can put your name in the credits here if you're into that sort of thing.
+And make sure to discuss new features in an issue before you send a pull request.
 
-
-## TODO
-
-1. Make the tests pass
-1. zsh/bash completions
 
 ## License
 
