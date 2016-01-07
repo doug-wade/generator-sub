@@ -24,8 +24,7 @@ gulp.task('nsp', function (cb) {
 
 gulp.task('pre-test', function () {
   // TODO: Istanbul can't parse the lodash template and horks with an
-  // Unexpected token < error.  Build a temp application and run Istanbul
-  // and eslint over it.
+  // Unexpected token < error.
   // return gulp.src('generators/**/*.js')
   //   .pipe(istanbul({
   //     includeUntested: true
