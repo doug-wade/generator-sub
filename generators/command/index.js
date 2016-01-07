@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var path = require('path');
 
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {
@@ -31,7 +32,7 @@ module.exports = yeoman.generators.Base.extend({
       name: this.props.name
     };
 
-    this.template('command.js', 'lib/' + this.props.name + '.js', context);
+    this.template('command.js', path.join('sub', this.props.name + '.js'), context);
   },
 
   install: function () {
