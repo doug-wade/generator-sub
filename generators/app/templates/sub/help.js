@@ -49,7 +49,6 @@ module.exports = (argv) => {
       var subCommand = subCommands[0];
       var helpText = getHelpText(subCommand);
       helpText.forEach((line) => console.log(line));
-
       return;
     } else {
       console.log('Could not find command ' + helpSub);

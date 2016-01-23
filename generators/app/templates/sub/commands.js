@@ -14,6 +14,5 @@ var registry = require('../lib/registry');
  */
 module.exports = () => {
   var commands = registry.getAll();
-
   commands.forEach((sub) => console.log('    ' + sub));
 };

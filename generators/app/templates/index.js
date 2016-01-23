@@ -22,7 +22,7 @@ function runCommand(command) {
 
 // Run help without checking config or updating in case something bad has happened
 var command = argv._[0];
-if (argv.h || argv.help || command === 'help') {
+if (!command || argv.h || argv.help || command === 'help') {
   require('./sub/help')(argv);
   return;
 }

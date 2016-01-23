@@ -7,9 +7,8 @@ module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
-    // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the primo ' + chalk.red('generator-sub') + ' generator!'
+      'Welcome to the primo ' + chalk.red('sub') + ' generator!'
     ));
 
     var prompts = [{
@@ -60,6 +59,11 @@ module.exports = yeoman.generators.Base.extend({
     this.template('_eslintrc', '.eslintrc', context);
     this.template('_gitignore', '.gitignore', context);
     this.template('_README.md', 'README.md', context);
+
+    this.template('lib/config.js', 'lib/config.js', context);
+    this.template('lib/persister.js', 'lib/persister.js', context);
+    this.template('lib/registry.js', 'lib/registry.js', context);
+
     this.template('sub/help.js', 'sub/help.js', context);
     this.template('sub/commands.js', 'sub/commands.js', context);
     this.template('sub/example.js', 'sub/example.js', context);
@@ -69,9 +73,6 @@ module.exports = yeoman.generators.Base.extend({
     } else {
       this.template('sub/npm-update.js', 'sub/update.js', context);
     }
-    this.template('lib/config.js', 'lib/config.js', context);
-    this.template('lib/persister.js', 'lib/persister.js', context);
-    this.template('lib/registry.js', 'lib/registry.js', context);
   },
 
   install: function () {
