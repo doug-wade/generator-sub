@@ -18,7 +18,9 @@ function getHelpText(fileName) {
   });
 
   var uncommentedLines = helpLines.map((line) => {
-    escapedCommentCharacters.forEach((char) => line = line.replace(char, ''));
+    escapedCommentCharacters.forEach((char) => {
+      line = line.replace(char, '');
+    });
     return line;
   });
 
