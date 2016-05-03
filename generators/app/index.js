@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var path = require('path');
 
 module.exports = yeoman.Base.extend({
   prompting: function () {
@@ -63,6 +64,9 @@ module.exports = yeoman.Base.extend({
     this.template('_gitignore', '.gitignore', context);
     this.template('_README.md', 'README.md', context);
 
+    this.template('completions/bash', path.join('completions', this.props.name + '.bash'), context);
+    this.template('completions/zsh', path.join('completions', this.props.name + '.zsh'), context);
+
     this.template('lib/config.js', 'lib/config.js', context);
     this.template('lib/logger.js', 'lib/logger.js', context);
     this.template('lib/persister.js', 'lib/persister.js', context);
@@ -70,6 +74,7 @@ module.exports = yeoman.Base.extend({
 
     this.template('sub/help.js', 'sub/help.js', context);
     this.template('sub/commands.js', 'sub/commands.js', context);
+    this.template('sub/completions.js', 'sub/completions.js', context);
     this.template('sub/example.js', 'sub/example.js', context);
     this.template('sub/init.js', 'sub/init.js', context);
     this.template('sub/version.js', 'sub/version.js', context);

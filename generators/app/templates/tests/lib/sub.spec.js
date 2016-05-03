@@ -8,7 +8,7 @@ const sub = s({ logger });
 test('Gets commands correctly', async t => {
   const commands = await sub.get();
 
-  t.is(commands.size, 6);
+  t.is(commands.size, 7);
 });
 
 test('Gets a command from an alias correctly', async t => {

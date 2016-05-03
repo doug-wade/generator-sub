@@ -48,6 +48,9 @@ module.exports = {
           console.log('    ' + emojis[0].character + '  ' + chalk[color](message));
         }
       },
+      bare: (message) => {
+        console.log(message);
+      }
     };
   },
 
