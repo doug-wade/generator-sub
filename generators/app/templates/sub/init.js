@@ -1,26 +1,29 @@
 'use strict';
 
-var config = require('../lib/config');
-var inquirer = require('inquirer');
+const inquirer = require('inquirer');
 
 /**
- * Set up configuration for <%= name %>. Runs interactive commands to walk you through setting up config.
+ * Set up configuration for example. Runs interactive commands to walk you through setting up config.
  * Usage:
- *     <%= name %> init
+ *     example init
  */
-module.exports = function (callback) {
-  inquirer.prompt([
-    {
-      default: 'User',
-      name   : 'name',
-      message: 'Please enter your name'
-    }<% if (updater === 'git') { %>, {
-      name   : 'repo',
-      message: 'Where did you install <%= name %> (where is your git repo located)?',
-      default: ''
-    }<% } %>
-  ], (answers) => {
-    config.updateConfig(answers);
-    callback();
+module.exports = function ({ persister, config }) {
+  return new Promise((resolve, reject) => {
+    inquirer.prompt([
+      {
+        default: 'User',
+        name   : 'name',
+        message: 'Please enter your name'
+      }, {
+        name   : 'repo',
+        message: 'Where did you install example (where is your git repo located)?',
+        default: ''
+      }
+    ]).then((answers) => {
+      Object.keys(answers).forEach((key) => {
+        config[key] = answers[key];
+      });
+      persister.writeConfig(config).then(resolve, reject);
+    });
   });
 };

@@ -95,8 +95,8 @@ Then, add your new logic inside the exported function inside lib/random.js
  *      sub random 100
  *      > 80.6944249663502
  */
-module.exports = function(argv){
-  console.log(Math.random()*(+argv._[1]));
+module.exports = function({ argv, logger }){
+  logger.info(Math.random()*(+argv._[1]));
 }
 ```
 

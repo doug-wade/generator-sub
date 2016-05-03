@@ -1,7 +1,5 @@
 'use strict';
 
-var registry = require('../lib/registry');
-
 /**
  * Lists all commands.
  * Usage:
@@ -12,7 +10,12 @@ var registry = require('../lib/registry');
  *          init
  *          update
  */
-module.exports = () => {
-  var commands = registry.getAll();
-  commands.forEach((sub) => console.log('    ' + sub));
+module.exports = ({ logger, sub }) => {
+  return new Promise((resolve, reject) => {
+    sub.get().then((commands) => {
+      logger.info('Available commands: ');
+      commands.forEach((s) => logger.random(s));
+      resolve();
+    }, reject);
+  });
 };
