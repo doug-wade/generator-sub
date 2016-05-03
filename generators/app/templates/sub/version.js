@@ -5,11 +5,11 @@ const fs = require('fs');
 const path = require('path');
 
 /**
- * Logs rfnpm's installed version
+ * Logs <%= name %>'s installed version
  * Usage:
- *     rfnpm -v
- *     rfnpm --version
- *     rfnpm version
+ *     <%= name %> -v
+ *     <%= name %> --version
+ *     <%= name %> version
  */
 module.exports = function ({ argv, logger }) {
   return new Promise((resolve, reject) => {

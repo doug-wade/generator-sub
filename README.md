@@ -57,9 +57,15 @@ Then, get the help
 
 ```bash
 » sub help
-A simple cli application. Broken into sub commands, invoked under sub:
-    example  an example command.  Ex. sub example
-    help    (also: -h or --help) print this help message.  Ex. sub help
+[INFO] A simple cli application. Broken into sub commands, invoked under sub:
+[INFO]     commands:  Lists all commands.
+[INFO]     completions:  Gets autocompletions.
+[INFO]     example:  An example command.
+[INFO]     help:  Gets the help text for a command.
+[INFO]     init:  Set up configuration for example. Runs interactive commands to walk you through setting up config.
+[INFO]     update:  Updates example by pulling the most recent commit from the master branch of the remote git repository.
+[INFO]     version:  Logs the installed version
+[INFO] Also takes the flag --noUpdate to prevent auto updating.
 ```
 
 And run the example sub command
@@ -96,7 +102,10 @@ Then, add your new logic inside the exported function inside lib/random.js
  *      > 80.6944249663502
  */
 module.exports = function({ argv, logger }){
-  logger.info(Math.random()*(+argv._[1]));
+  return new Promise((resolve, reject) => {
+    logger.info(Math.random()*(+argv._[1]));
+    resolve();
+  });
 }
 ```
 

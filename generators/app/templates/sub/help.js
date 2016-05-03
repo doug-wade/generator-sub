@@ -4,11 +4,11 @@ const fs = require('fs');
 const libDir = __dirname;
 const path = require('path');
 
-/**
- * Gets the help text for a command.
- * @param  {String} fileName The name of the command to get the help text for.
- * @return {String}          The first line of the help text.
- */
+  /**
+   * Gets the help text for a command.
+   * @param  {String} fileName The name of the command to get the help text for.
+   * @return {String}          The first line of the help text.
+   */
 function getHelpText(fileName) {
   const file = fs.readFileSync(path.join(libDir, fileName + '.js')).toString();
   const lines = file.split('\n');
@@ -33,11 +33,11 @@ function getHelpText(fileName) {
   return uncommentedLines.filter((line) => !(line.replace(/\s/g, '').length < 1));
 }
 
-/**
- * Gets the first line of help text for a command.
- * @param  {String} fileName The name of the command to get the help text for.
- * @return {String}          The first line of the help text.
- */
+  /**
+   * Gets the first line of help text for a command.
+   * @param  {String} fileName The name of the command to get the help text for.
+   * @return {String}          The first line of the help text.
+   */
 function getFirstLine(fileName) {
   return getHelpText(fileName)[0];
 }
@@ -45,10 +45,10 @@ function getFirstLine(fileName) {
 /**
  * Gets help for a sub command.
  * Usage:
- *      rfnpm help example
+ *      <%= name %> help example
  *      > An example command.
  *      > Usage:
- *      >      rfnpm example
+ *      >      <%= name %> example
  *      >      > 'You ran the example command!'
  */
 module.exports = function ({ argv, logger, sub }) {
@@ -66,12 +66,13 @@ module.exports = function ({ argv, logger, sub }) {
           logger.error('Could not find command ' + helpSub);
           reject();
         }
-      }
+      } else {
 
-      logger.info('A simple cli application. Broken into sub commands, invoked under sub: ');
-      commands.forEach((s) => logger.info('    ' + s + ': ' + getFirstLine(s)));
-      logger.info('Also takes the flag --noUpdate to prevent auto updating.');
-      resolve();
+        logger.info('A simple cli application. Broken into sub commands, invoked under sub: ');
+        commands.forEach((s) => logger.info('    ' + s + ': ' + getFirstLine(s)));
+        logger.info('Also takes the flag --noUpdate to prevent auto updating.');
+        resolve();
+      }
     }, reject);
   });
 };
