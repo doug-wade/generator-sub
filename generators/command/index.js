@@ -13,11 +13,18 @@ module.exports = yeoman.generators.Base.extend({
       'Welcome to the kryptonian ' + chalk.red('generator-sub') + ' generator!'
     ));
 
-    var prompts = [{
-      type   : 'input',
-      name   : 'name',
-      message: 'What would you like to call your sub command?'
-    }];
+    var prompts = [
+      {
+        type   : 'input',
+        name   : 'name',
+        message: 'What would you like to call your sub command?'
+      },
+      {
+        type   :'confirm',
+        name   :'isInternal',
+        message:'Should this be an internal command? (Only shown with --long)'
+      }
+    ];
 
     this.prompt(prompts, function (props) {
       this.props = props;
@@ -29,7 +36,8 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: function () {
     var context = {
-      name: this.props.name
+      name: this.props.name,
+      isInternal: this.props.isInternal
     };
 
     this.template('command.js', path.join('sub', this.props.name + '.js'), context);
