@@ -32,7 +32,7 @@ function getHelpLines(fileName) {
    * @return {String}          The first line of the help text.
    */
 function getHelpText(fileName) {
-  const helpLines = getHelpLines(fileName)
+  const helpLines = getHelpLines(fileName);
   
   const escapedCommentCharacters = [' \*/', '\*/', ' \*', '/\*', '\*', '//'];
 
@@ -65,67 +65,76 @@ function getFirstLine(fileName) {
    * @return {boolean}        Whether or not this command is considered a "long" command
    */
 function isLongCommand(fileName) {
-  const longTest = /@kind\s+internal/;
+  const longTest = /.*@kind\s+internal.*/;
   const lines = getHelpLines(fileName);
   return lines.some((line) => longTest.test(line));
+}
+
+  /**
+   * Shows the help for a particular subtopic
+   */
+function showSubHelp(logger, commands, helpSub, resolve, reject) {
+  if (commands.has(helpSub)) {
+    const helpText = getHelpText(helpSub);
+    helpText.forEach((line) => logger.info(line));
+
+    resolve();
+  } else {
+    logger.error('Could not find command ' + helpSub);
+    reject();
+  }
+}
+  /**
+   * Shows the help message, which includes a brief description for each command.
+   */
+function showCommands(logger, commands, resolve, reject, showLong) {
+  let commandsArr = Array.from(commands);
+
+  const longCommands = commandsArr.filter((command) => isLongCommand(command));
+  const basicCommands = commandsArr.filter((command) => !isLongCommand(command));
+
+  logger.info('A simple cli application. Broken into sub commands, invoked under sub: ');
+
+  if (basicCommands.length) {
+    basicCommands.forEach(s => logger.info('    ' + s + ': ' + getFirstLine(s)));  
+  }
+
+  if (longCommands.length) {
+    if (showLong) {
+      logger.info('');
+      logger.info('These commands are marked as "internal":');
+      longCommands.forEach(s => logger.info('    ' + s + ': ' + getFirstLine(s)));
+      logger.info('');
+      logger.info('Also takes the flag --noUpdate to prevent auto updating.');  
+    } else {
+      logger.info('There are more, internal commands that can be shown with the --long flag');
+    }
+  }
+
+  resolve();
 }
 
 /**
  * Gets help for a sub command.
  * Usage:
- *      <%= name %> help example
+ *      blah help example
  *      > An example command.
  *      > Usage:
- *      >      <%= name %> example
+ *      >      blah example
  *      >      > 'You ran the example command!'
  */
 module.exports = function ({ argv, logger, sub }) {
   return new Promise((resolve, reject) => {
     sub.get().then((commands) => {
-      const secondaryCommand = argv ? argv._[1] : undefined;
-      let showLong = false;
-      let helpSub = null;
-      if (secondaryCommand) {
-        if (secondaryCommand === "--long") {
-          showLong = true;
-        } else {
-          helpSub = secondaryCommand;
-        }  
-      }
+      const helpSub = argv ? argv._[1] : undefined;
+      let showLong = argv.long;
 
       if (helpSub) {
-        if (commands.has(helpSub)) {
-          const helpText = getHelpText(helpSub);
-          helpText.forEach((line) => logger.info(line));
-
-          resolve();
-        } else {
-          logger.error('Could not find command ' + helpSub);
-          reject();
-        }
+        showSubHelp(logger, commands, helpSub, resolve, reject);
       } else {
-        logger.info('A simple cli application. Broken into sub commands, invoked under sub: ');
-
-        const longCommands = commands.filter(isLongCommand);
-        const basicCommands = commands.filter(command => !isLongCommand(command));
-
-        if (basicCommands.length) {
-          basicCommands.forEach(s => logger.info('    ' + s + ': ' + getFirstLine(s)));  
-        }
-
-        if (longCommands.length) {
-          if (showLong) {
-            logger.info('');
-            logger.info('These commands are marked as "internal":');
-            longCommands.forEach(s => logger.info('    ' + s + ': ' + getFirstLine(s)));
-            logger.info('');
-            logger.info('Also takes the flag --noUpdate to prevent auto updating.');  
-          } else {
-            logger.info('There are more, internal commands that can be shown with the --long flag');
-          }
-        }
-        resolve();
+        showCommands(logger, commands, resolve, reject, showLong);
       }
+
     }, reject);
   });
 };
