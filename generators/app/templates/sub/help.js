@@ -117,10 +117,10 @@ function showCommands(logger, commands, resolve, reject, showLong) {
 /**
  * Gets help for a sub command.
  * Usage:
- *      blah help example
+ *      <%= name %> help example
  *      > An example command.
  *      > Usage:
- *      >      blah example
+ *      >      <%= name %> example
  *      >      > 'You ran the example command!'
  */
 module.exports = function ({ argv, logger, sub }) {
