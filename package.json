@@ -17,28 +17,32 @@
   ],
   "dependencies": {
     "chalk": "^1.0.0",
-    "eslint": "^2.8.0",
-    "inquirer": "1.0.2",
-    "yeoman-generator": "^0.22.2",
+    "inquirer": "^1.1.0",
+    "yeoman-generator": "^0.23.4",
     "yeoman-test": "^1.0.0",
     "yosay": "^1.1.0"
   },
   "devDependencies": {
-    "eslint": "^2.9.0",
-    "gulp": "^3.6.0",
-    "gulp-coveralls": "^0.1.0",
-    "gulp-eslint": "2.0.0",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-istanbul": "0.10.4",
-    "gulp-mocha": "^2.0.0",
-    "gulp-nsp": "^2.1.0",
-    "gulp-plumber": "^1.0.0",
+    "ava": "^0.15.2",
+    "nsp": "^2.5.0",
+    "nyc": "^6.6.1",
+    "xo": "^0.16.0",
     "yeoman-assert": "^2.0.0"
   },
   "repository": "prekolna/generator-sub",
   "scripts": {
-    "prepublish": "gulp prepublish",
-    "test": "gulp"
+    "test": "nsp check && xo generators/app/index.js generators/command/index.js test/*.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "xo": {
+    "rules": {
+      "key-spacing": [
+        "error",
+        {
+          "align": "colon"
+        }
+      ]
+    },
+    "esnext": true
+  }
 }

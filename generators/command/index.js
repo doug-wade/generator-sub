@@ -1,49 +1,34 @@
 'use strict';
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
-var path = require('path');
+const path = require('path');
+const yeoman = require('yeoman-generator');
+const chalk = require('chalk');
+const yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
-  prompting: function () {
-    var done = this.async();
+	prompting() {
+		this.log(yosay(`Welcome to the kryptonian ${chalk.red('generator-sub')} generator!`));
 
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the kryptonian ' + chalk.red('generator-sub') + ' generator!'
-    ));
+		const prompts = [{
+			type   : 'input',
+			name   : 'name',
+			message: 'What would you like to call your sub command?'
+		}, {
+			type   : 'confirm',
+			name   : 'isInternal',
+			message: 'Should this be an internal command? (Only shown with --long)'
+		}];
 
-    var prompts = [
-      {
-        type   : 'input',
-        name   : 'name',
-        message: 'What would you like to call your sub command?'
-      },
-      {
-        type   :'confirm',
-        name   :'isInternal',
-        message:'Should this be an internal command? (Only shown with --long)'
-      }
-    ];
+		this.prompt(prompts, function (props) { // eslint-disable-line prefer-arrow-callback
+			this.props = props;
+		}.bind(this));
+	},
 
-    this.prompt(prompts, function (props) {
-      this.props = props;
-      // To access props later use this.props.someOption;
+	writing: () => {
+		const context = {
+			name      : this.props.name,
+			isInternal: this.props.isInternal
+		};
 
-      done();
-    }.bind(this));
-  },
-
-  writing: function () {
-    var context = {
-      name: this.props.name,
-      isInternal: this.props.isInternal
-    };
-
-    this.template('command.js', path.join('sub', this.props.name + '.js'), context);
-  },
-
-  install: function () {
-    this.installDependencies();
-  }
+		this.template('command.js', path.join('sub', `${this.props.name}.js`), context);
+	}
 });
