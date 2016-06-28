@@ -5,6 +5,9 @@
  * Usage:
  *     <%= name %>
  *     > 'You ran the <%= name %> command!'
+<% if (isInternal) { -%>
+ * @kind internal
+<% } -%>
  */
 module.exports = function ({ argv, config, logger }) {
   return new Promise((resolve) => {
