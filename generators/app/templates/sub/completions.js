@@ -2,6 +2,7 @@
 
 /**
  * Gets autocompletions.
+ * @kind internal
  * Usage:
  *      <%= name %>
  *      # press tab key to get completions
