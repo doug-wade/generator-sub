@@ -22,7 +22,7 @@ module.exports = function ({ persister, config }) {
         name   : 'repo',
         message: 'Where did you install example (where is your git repo located)?',
         default: ''
-      },{
+      }, {
         name   : 'tag',<% if (updater === "npm") { %>
         message: 'What dist-tag do you want to update from?',
         default: 'stable',
@@ -30,10 +30,6 @@ module.exports = function ({ persister, config }) {
         message: 'What branch do you want to update from?',
         default: 'master',
         choices: ['master', 'stable', 'latest'],<% } %>
-        type   : 'list',
-      },{
-        name   : 'tag',
-
         type   : 'list',
       }, {
         name   : 'shell',
