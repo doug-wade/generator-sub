@@ -8,10 +8,11 @@ const exec = require('child_process').exec;
  *     <%= name %> update
  *     # output from npm
  */
-module.exports = function ({ logger }) {
-  return new new Promise(function (resolve, reject) {
-    exec('npm install -g <%= name %>', (err, stdout) => {
+module.exports = function ({ config, logger }) {
+  return new Promise(function (resolve, reject) {
+    exec('npm install -g <%= name %>@' + config.tag, (err, stdout) => {
       if (err) {
+        logger.error(err);
         reject(err);
       } else {
         logger.info(stdout);
