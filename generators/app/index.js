@@ -38,12 +38,10 @@ module.exports = yeoman.Base.extend({
 		const that = this;
 		return this.prompt(prompts).then(props => {
 			that.props = props;
-			that.log(`this.props ${JSON.stringify(this.props)}`);
 		});
 	},
 
 	writing: function () {
-		this.log(`this.props ${this.props}`);
 		const that = this;
 		const context = {
 			argParser     : that.props.argParser,
