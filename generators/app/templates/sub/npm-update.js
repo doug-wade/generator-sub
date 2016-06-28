@@ -10,7 +10,7 @@ const exec = require('child_process').exec;
  */
 module.exports = function ({ logger }) {
   return new new Promise(function (resolve, reject) {
-    exec('npm install -g <%= name %>', (err, stdout) => {
+    exec('npm install -g <%= name %>@' + config.tag, (err, stdout) => {
       if (err) {
         reject(err);
       } else {

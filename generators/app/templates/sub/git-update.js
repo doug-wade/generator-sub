@@ -14,7 +14,7 @@ module.exports = function ({ config, logger }, cb) {
   try {
     var dir = execSync('pwd').toString();
     execSync('cd ' + config.repo);
-    execSync('git pull origin master');
+    execSync('git pull origin ' + config.tag);
     execSync('cd ' + dir);
     result = 0;
   } catch (err) {
