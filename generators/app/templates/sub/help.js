@@ -4,8 +4,6 @@ const fs = require('fs');
 const libDir = __dirname;
 const path = require('path');
 
-
-
   /**
    * Returns the lines of the given that are top-level comments
    * @param {String} fileName The name of the file to find comment lines for.
@@ -33,7 +31,7 @@ function getHelpLines(fileName) {
    */
 function getHelpText(fileName) {
   const helpLines = getHelpLines(fileName);
-  
+
   const escapedCommentCharacters = [' \*/', '\*/', ' \*', '/\*', '\*', '//'];
 
   const uncommentedLines = helpLines.map((line) => {
@@ -96,7 +94,7 @@ function showCommands(logger, commands, resolve, reject, showLong) {
   logger.info('A simple cli application. Broken into sub commands, invoked under sub: ');
 
   if (basicCommands.length) {
-    basicCommands.forEach(s => logger.info('    ' + s + ': ' + getFirstLine(s)));  
+    basicCommands.forEach(s => logger.info('    ' + s + ': ' + getFirstLine(s)));
   }
 
   if (longCommands.length) {
@@ -105,7 +103,7 @@ function showCommands(logger, commands, resolve, reject, showLong) {
       logger.info('These commands are marked as "internal":');
       longCommands.forEach(s => logger.info('    ' + s + ': ' + getFirstLine(s)));
       logger.info('');
-      logger.info('Also takes the flag --noUpdate to prevent auto updating.');  
+      logger.info('Also takes the flag --noUpdate to prevent auto updating.');
     } else {
       logger.info('There are more, internal commands that can be shown with the --long flag');
     }
