@@ -5,9 +5,7 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = yeoman.Base.extend({
-	prompting() {
-		const done = this.async();
-
+	prompting: function () {
 		this.log(yosay(`Welcome to the primo ${chalk.red('sub')} generator!`));
 
 		const prompts = [{
@@ -37,19 +35,22 @@ module.exports = yeoman.Base.extend({
 			default: 7
 		}];
 
-		this.prompt(prompts, function (props) {  // eslint-disable-line prefer-arrow-callback
-			this.props = props;
-			done();
-		}.bind(this));
+		const that = this;
+		return this.prompt(prompts).then(props => {
+			that.props = props;
+			that.log(`this.props ${JSON.stringify(this.props)}`);
+		});
 	},
 
-	writing: () => {
+	writing: function () {
+		this.log(`this.props ${this.props}`);
+		const that = this;
 		const context = {
-			argParser     : this.props.argParser,
-			name          : this.props.name,
-			repo          : this.props.repo,
-			updater       : this.props.updater,
-			updateInterval: this.props.updateInterval
+			argParser     : that.props.argParser,
+			name          : that.props.name,
+			repo          : that.props.repo,
+			updater       : that.props.updater,
+			updateInterval: that.props.updateInterval
 		};
 
 		this.template('_package.json', 'package.json', context);
@@ -91,7 +92,8 @@ module.exports = yeoman.Base.extend({
 		this.template('tests/fixtures/mockPersister.js', 'tests/fixtures/mockPersister.js', context);
 		this.template('tests/fixtures/spyLogger.js', 'tests/fixtures/spyLogger.js', context);
 	},
-	install: () => {
+
+	install: function () {
 		this.installDependencies();
 	}
 });
