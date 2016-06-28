@@ -41,7 +41,8 @@
         {
           "align": "colon"
         }
-      ]
+      ],
+      "babel/object-shorthand": 0
     },
     "esnext": true
   }
