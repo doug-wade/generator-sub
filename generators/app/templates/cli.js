@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 'use strict';
 
+<% if (argParser === "minimist") { %>
 const minimist = require('minimist');
 const argv = minimist(process.argv.slice(2), {
   boolean: true,
 });
+<% } %><% if (argParser === "yargs") { %>
+const argv = require('yargs').argv;
+<% } %>
 
 const log = require('./lib/logger');
 const logger = log.getLogger(log.getLevelFromArgv(argv));
