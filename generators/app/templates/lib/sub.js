@@ -16,7 +16,7 @@ const aliases = {
 module.exports = ({ logger }) => {
   return {
   /**
-   * Gets all subcommands that example supports.
+   * Gets all subcommands that <%= name %> supports.
    * @return {Array of String} The names of all the supported subcommands.
    */
     get,

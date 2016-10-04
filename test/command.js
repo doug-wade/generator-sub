@@ -3,7 +3,7 @@ import fs from 'fs';
 import helpers from 'yeoman-test';
 import test from 'ava';
 
-test(`generator-react-server:command creates file`, async t => {
+test(`generator-sub:command creates file`, async t => {
 	let testDir;
 	await helpers.run(path.join(__dirname, '../generators/app'))
 		.inTmpDir(dir => {
@@ -12,18 +12,15 @@ test(`generator-react-server:command creates file`, async t => {
 		.withPrompts({name: 'command', isInternal: false})
 		.toPromise();
 
-	t.true(await exists('sub/command', testDir));
+	t.true(exists('sub/commands.js', testDir));
 });
 
 function exists(filename, dir) {
 	filename = path.join(dir, filename);
-	return new Promise((resolve, reject) => {
-		fs.access(filename, fs.F_OK, err => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
-	});
+	try {
+		fs.accessSync(filename, fs.F_OK);
+		return true;
+	} catch (err) {
+		return false;
+	}
 }

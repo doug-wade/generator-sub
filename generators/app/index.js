@@ -12,22 +12,24 @@ module.exports = yeoman.Base.extend({
 			type   : 'input',
 			name   : 'name',
 			message: 'What would you like to call your cli app?',
-			default: this.appname // Default to current folder name
+			default: this.appname.replace(/\s/g, '-') // Default to current folder name
 		}, {
 			type   : 'list',
 			name   : 'argParser',
 			message: 'Which argument parser would you like to use?',
-			choices: ['minimist', 'yargs']
+			choices: ['minimist', 'yargs'],
+			default: 'minimist'
 		}, {
 			type   : 'input',
 			name   : 'repo',
 			message: 'What git repo will you be storing this in?',
-			default: 'https://github.com/doug-wade/example-sub'
+			default: `https://github.com/doug-wade/${this.appname.replace(/\s/g, '-')}`
 		}, {
 			type   : 'list',
 			name   : 'updater',
 			message: 'How would you like users to update their app?',
-			choices: ['git', 'npm']
+			choices: ['npm', 'git'],
+			default: 'npm'
 		}, {
 			type   : 'input',
 			name   : 'updateInterval',
@@ -38,6 +40,8 @@ module.exports = yeoman.Base.extend({
 		const that = this;
 		return this.prompt(prompts).then(props => {
 			that.props = props;
+			that.props.sterileName = props.name.replace(/-/g, '');
+			that.props.executable = props.name.replace('-cli', '');
 		});
 	},
 
@@ -45,7 +49,9 @@ module.exports = yeoman.Base.extend({
 		const that = this;
 		const context = {
 			argParser     : that.props.argParser,
+			executable    : that.props.executable,
 			name          : that.props.name,
+			sterileName   : that.props.sterileName,
 			repo          : that.props.repo,
 			updater       : that.props.updater,
 			updateInterval: that.props.updateInterval

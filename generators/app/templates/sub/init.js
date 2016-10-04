@@ -9,7 +9,8 @@ const path = require('path');
 /**
  * Set up configuration for example. Runs interactive commands to walk you through setting up config.
  * Usage:
- *     example init
+ *     <%= executable %> init
+ *     # output from <%= executable %>
  */
 module.exports = function ({ persister, config }) {
   return new Promise((resolve, reject) => {
@@ -18,11 +19,11 @@ module.exports = function ({ persister, config }) {
         default: 'User',
         name   : 'name',
         message: 'Please enter your name'
-      }, {
+      }<% if (updater === "git") { %>, {
         name   : 'repo',
         message: 'Where did you install example (where is your git repo located)?',
         default: ''
-      }, {
+      }<% } %>, {
         name   : 'tag',<% if (updater === "npm") { %>
         message: 'What dist-tag do you want to update from?',
         default: 'stable',
@@ -46,10 +47,10 @@ module.exports = function ({ persister, config }) {
         let command = 'source ';
         let profile;
         if (answers.shell === 'zsh') {
-          command += path.resolve(path.join(__dirname, '..', 'completions', 'example.zsh'));
+          command += path.resolve(path.join(__dirname, '..', 'completions', '<%= name %>.zsh'));
           profile = '.zshrc';
         } else {
-          command += path.resolve(path.join(__dirname, '..', 'completions', 'example.bash'));
+          command += path.resolve(path.join(__dirname, '..', 'completions', '<%= name %>.bash'));
           profile = '.bash_profile';
         }
 

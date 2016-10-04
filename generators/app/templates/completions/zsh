@@ -9,7 +9,7 @@ _<%= name %>() {
   read -cA words
   word="${words[2]}"
 
-  completions="$(example completions "${word}")"
+  completions="$(<%= name %> completions "${word}")"
 
   reply=("${(ps:\n:)completions}")
 }

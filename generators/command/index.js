@@ -18,17 +18,19 @@ module.exports = yeoman.generators.Base.extend({
 			message: 'Should this be an internal command? (Only shown with --long)'
 		}];
 
-		this.prompt(prompts, function (props) { // eslint-disable-line prefer-arrow-callback
-			this.props = props;
-		}.bind(this));
+		const that = this;
+		return this.prompt(prompts).then(props => {
+			that.props = props;
+		});
 	},
 
-	writing: () => {
+	writing() {
+		const that = this;
 		const context = {
-			name      : this.props.name,
-			isInternal: this.props.isInternal
+			isInternal: that.props.isInternal,
+			name      : that.props.name
 		};
 
-		this.template('command.js', path.join('sub', `${this.props.name}.js`), context);
+		this.template('command.js', path.join('sub', `${that.props.name}.js`), context);
 	}
 });

@@ -3,9 +3,9 @@
 var execSync = require('child_process').execSync;
 
 /**
- * Updates <%= name %> by pulling the most recent commit from the master branch of the remote git repository.
+ * Updates <%= executable %> by pulling the most recent commit from the master branch of the remote git repository.
  * Usage:
- *     <%= name %> update
+ *     <%= executable %> update
  *     # output from git
  */
 module.exports = function ({ config, logger }, cb) {

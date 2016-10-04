@@ -3,9 +3,9 @@
 const exec = require('child_process').exec;
 
 /**
- * Updates <%= name %> by installing the most recent version of the npm package.
+ * Updates <%= executable %> by installing the most recent version of the npm package.
  * Usage:
- *     <%= name %> update
+ *     <%= executable %> update
  *     # output from npm
  */
 module.exports = function ({ config, logger }) {

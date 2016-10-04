@@ -3,7 +3,7 @@
 /**
  * Lists all commands.
  * Usage:
- *      <%= name %> commands
+ *      <%= executable %> commands
  *          commands
  *          example
  *          help

@@ -5,11 +5,11 @@ const fs = require('fs');
 const path = require('path');
 
 /**
- * Logs <%= name %>'s installed version
+ * Logs <%= executable %>'s installed version
  * Usage:
- *     <%= name %> -v
- *     <%= name %> --version
- *     <%= name %> version
+ *     <%= executable %> -v
+ *     <%= executable %> --version
+ *     <%= executable %> version
  */
 module.exports = function ({ argv, logger }) {
   return new Promise((resolve, reject) => {

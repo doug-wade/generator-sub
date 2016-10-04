@@ -4,7 +4,7 @@
  * Gets autocompletions.
  * @kind internal
  * Usage:
- *      <%= name %>
+ *      <%= executable %>
  *      # press tab key to get completions
  */
 module.exports = ({ argv, logger, sub }) => {
