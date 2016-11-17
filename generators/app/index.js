@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = yeoman.Base.extend({
-	prompting: function () {
+	prompting() {
 		this.log(yosay(`Welcome to the primo ${chalk.red('sub')} generator!`));
 
 		const prompts = [{
@@ -41,7 +41,7 @@ module.exports = yeoman.Base.extend({
 		});
 	},
 
-	writing: function () {
+	writing() {
 		const that = this;
 		const context = {
 			argParser     : that.props.argParser,
@@ -91,7 +91,7 @@ module.exports = yeoman.Base.extend({
 		this.template('tests/fixtures/spyLogger.js', 'tests/fixtures/spyLogger.js', context);
 	},
 
-	install: function () {
+	install() {
 		this.installDependencies();
 	}
 });
