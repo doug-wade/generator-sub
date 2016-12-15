@@ -3,7 +3,7 @@
 /**
  * An example command.
  * Usage:
- *     <%= name %> example
+ *     <%= executable %> example
  *     > 'You ran the example command!'
  */
 module.exports = function ({ config, logger }) {

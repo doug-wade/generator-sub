@@ -8,18 +8,14 @@
     "node_modules"
   ],
   "bin": {
-    "<%= name %>": "./cli.js"
+    "<%= name.replace('-cli', '') %>": "./cli.js"
   },
   "dependencies": {
     "chalk": "^1.1.3",
     "inquirer": "^1.0.2",
     "random-emoji": "^1.0.1",
     "untildify": "^3.0.0",
-<% if (argParser === "minimist") { %>
-    "minimist": "^1.2.0"
-<% } %><% if (argParser === "yargs") { %>
-    "yargs": "^3.32.0"
-<% } %>
+    "<% if (argParser === 'minimist') { %>minimist<% } %><% if (argParser === 'yargs') { %>yargs<% } %>": "<% if (argParser === 'minimist') { %>1.2.0<% } %><% if (argParser === 'yargs') { %>3.32.0<% } %>"
   },
   "devDependencies": {
     "ava": "^0.16.0",

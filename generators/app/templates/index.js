@@ -26,7 +26,7 @@ module.exports = function ({ argv, config, logger, persister, sub }) {
             persister.writeLastUpgraded({ timestamp: Date.now(), by: 'auto' }).then(() => {
               runCommand({ command, opts, sub }).then(resolve, reject);
             });
-          } else if (!argv.noUpdate && command !== 'upgrade' && Date.now() - lastUpgraded.timestamp > ONE_DAY * 7) {
+          } else if (!argv.noUpdate && command !== 'upgrade' && Date.now() - lastUpgraded.timestamp > ONE_DAY * <%= updateInterval %>) {
             logger.info('auto-upgrading');
             opts.by = 'auto';
             sub.run('upgrade', opts).then(() => {
@@ -48,7 +48,7 @@ function runCommand({ command, opts, sub }) {
       sub.run('init', opts).then(resolve, reject);
     } else if (!opts.config.isValid()) {
       // Check config before running command so all commands are guaranteed to have valid config
-      logger.error('There is a problem with your config; running example init to set up config');
+      logger.error('There is a problem with your config; running <%= executable %> init to set up config');
       return sub.run('init', opts).then(() => {
         sub.run(command, opts).then(resolve, reject);
       });

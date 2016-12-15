@@ -10,7 +10,7 @@
 <% } -%>
  */
 module.exports = function ({ argv, config, logger }) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     logger.info(config.name + ', you ran the ' + argv._[0] + ' command!');
     resolve();
   });

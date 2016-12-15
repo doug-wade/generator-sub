@@ -19,19 +19,21 @@
     "chalk": "^1.0.0",
     "inquirer": "^2.0.0",
     "yeoman-generator": "^0.24.1",
-    "yeoman-test": "^1.0.0",
-    "yosay": "^1.1.0"
+    "yosay": "1.2.0"
   },
   "devDependencies": {
     "ava": "^0.17.0",
-    "nsp": "^2.5.0",
     "nyc": "^10.0.0",
+    "snyk": "^1.20.0",
     "xo": "^0.17.0",
-    "yeoman-assert": "^2.0.0"
+    "yeoman-assert": "^2.2.1",
+    "yeoman-test": "^1.5.1"
   },
   "repository": "prekolna/generator-sub",
   "scripts": {
-    "test": "nsp check && xo generators/app/index.js generators/command/index.js test/*.js"
+    "lint": "xo generators/app/index.js generators/command/index.js test/*.js",
+    "test": "npm run unit-test && snyk test && npm run lint",
+    "unit-test": "ava"
   },
   "license": "MIT",
   "xo": {

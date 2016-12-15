@@ -5,12 +5,9 @@ import test from 'ava';
 import helpers from 'yeoman-test';
 
 const files = [
-	'completions/bash',
-	'completions/zsh',
-
 	'lib/config.js',
 	'lib/persister.js',
-	'lib/registry.js',
+	'lib/logger.js',
 	'lib/sub.js',
 
 	'sub/commands.js',
@@ -56,7 +53,7 @@ const testCases = [{
 }];
 
 testCases.forEach(testCase => {
-	test(`generator-react-server:app ${testCase.name} creates files`, async t => {
+	test(`generator-sub:app ${testCase.name} creates files`, async t => {
 		let testDir;
 		await helpers.run(path.join(__dirname, '../generators/app'))
 			.inTmpDir(dir => {
@@ -66,36 +63,37 @@ testCases.forEach(testCase => {
 			.toPromise();
 
 		t.plan(files.length);
-		files.forEach(async file => {
-			t.true(await exists(file, testDir));
+		files.forEach(file => {
+			t.true(exists(file, testDir));
 		});
 	});
 
-	test(`generator-react-server:app ${testCase.name} passes the test target`, async t => {
-		let testDir;
-		await helpers.run(path.join(__dirname, '../generators/app'))
-			.inTmpDir(dir => {
-				testDir = dir;
-			})
-			.withPrompts({name: 'foo', dockerCfg: false})
-			.toPromise();
+	// these don't terminate on ci and take forever locally, so only run them when
+	// publishing
+	if (!process.env.CONTINUOUS_INTEGRATION) {
+		test(`generator-sub:app ${testCase.name} passes the test target`, async t => {
+			let testDir;
+			await helpers.run(path.join(__dirname, '../generators/app'))
+				.inTmpDir(dir => {
+					testDir = dir;
+				})
+				.withPrompts({name: 'foo', dockerCfg: false})
+				.toPromise();
 
-		await installDeps();
-		t.true(await runsSuccessfully('npm test', testDir));
-	});
+			await installDeps(testDir);
+			t.true(await runsSuccessfully('npm test', testDir));
+		});
+	}
 });
 
 function exists(filename, dir) {
 	filename = path.join(dir, filename);
-	return new Promise((resolve, reject) => {
-		fs.access(filename, fs.F_OK, err => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
-	});
+	try {
+		fs.accessSync(filename, fs.F_OK);
+		return true;
+	} catch (err) {
+		return false;
+	}
 }
 
 function runsSuccessfully(command, dir) {
@@ -106,15 +104,17 @@ function runsSuccessfully(command, dir) {
 			if (error) {
 				reject(error);
 			} else {
-				resolve();
+				resolve(true);
 			}
 		});
 	});
 }
 
-function installDeps() {
+function installDeps(dir) {
 	return new Promise((resolve, reject) => {
-		cp.exec('npm install', error => {
+		cp.exec('npm install', {
+			cwd: dir
+		}, error => {
 			if (error) {
 				reject(error);
 			} else {
