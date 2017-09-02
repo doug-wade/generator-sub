@@ -68,7 +68,7 @@ testCases.forEach(testCase => {
 		});
 	});
 
-	// these don't terminate on ci and take forever locally, so only run them when
+	// These don't terminate on ci and take forever locally, so only run them when
 	// publishing
 	if (!process.env.CONTINUOUS_INTEGRATION) {
 		test(`generator-sub:app ${testCase.name} passes the test target`, async t => {

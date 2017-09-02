@@ -1,10 +1,10 @@
 'use strict';
 const path = require('path');
-const yeoman = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
-module.exports = yeoman.generators.Base.extend({
+module.exports = class extends Generator {
 	prompting() {
 		this.log(yosay(`Welcome to the kryptonian ${chalk.red('generator-sub')} generator!`));
 
@@ -22,7 +22,7 @@ module.exports = yeoman.generators.Base.extend({
 		return this.prompt(prompts).then(props => {
 			that.props = props;
 		});
-	},
+	}
 
 	writing() {
 		const that = this;
@@ -31,6 +31,10 @@ module.exports = yeoman.generators.Base.extend({
 			name      : that.props.name
 		};
 
-		this.template('command.js', path.join('sub', `${that.props.name}.js`), context);
+		this.fs.copyTpl(
+			this.templatePath('command.js'),
+			this.destinationPath(path.join('sub', `${that.props.name}.js`)),
+			context
+		);
 	}
-});
+};

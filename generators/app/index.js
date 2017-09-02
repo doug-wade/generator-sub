@@ -1,10 +1,10 @@
 'use strict';
 const path = require('path');
-const yeoman = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
-module.exports = yeoman.Base.extend({
+module.exports = class extends Generator {
 	prompting() {
 		this.log(yosay(`Welcome to the primo ${chalk.red('sub')} generator!`));
 
@@ -43,7 +43,7 @@ module.exports = yeoman.Base.extend({
 			that.props.sterileName = props.name.replace(/-/g, '');
 			that.props.executable = props.name.replace('-cli', '');
 		});
-	},
+	}
 
 	writing() {
 		const that = this;
@@ -57,47 +57,56 @@ module.exports = yeoman.Base.extend({
 			updateInterval: that.props.updateInterval
 		};
 
-		this.template('_package.json', 'package.json', context);
-		this.template('index.js', 'index.js', context);
-		this.template('cli.js', 'cli.js', context);
-		this.template('_eslintrc', '.eslintrc', context);
-		this.template('_eslintignore', '.eslintignore', context);
-		this.template('_gitignore', '.gitignore', context);
-		this.template('_README.md', 'README.md', context);
+		const files = [
+			['_package.json', 'package.json'],
+			['index.js', 'index.js'],
+			['cli.js', 'cli.js'],
+			['_eslintrc', '.eslintrc'],
+			['_eslintignore', '.eslintignore'],
+			['_gitignore', '.gitignore'],
+			['_README.md', 'README.md'],
 
-		this.template('completions/bash', path.join('completions', `${this.props.name}.bash`), context);
-		this.template('completions/zsh', path.join('completions', `${this.props.name}.zsh`), context);
+			['completions/bash', path.join('completions', `${this.props.name}.bash`)],
+			['completions/zsh', path.join('completions', `${this.props.name}.zsh`)],
 
-		this.template('lib/config.js', 'lib/config.js', context);
-		this.template('lib/logger.js', 'lib/logger.js', context);
-		this.template('lib/persister.js', 'lib/persister.js', context);
-		this.template('lib/sub.js', 'lib/sub.js', context);
+			['lib/config.js', 'lib/config.js'],
+			['lib/logger.js', 'lib/logger.js'],
+			['lib/persister.js', 'lib/persister.js'],
+			['lib/sub.js', 'lib/sub.js'],
 
-		this.template('sub/help.js', 'sub/help.js', context);
-		this.template('sub/commands.js', 'sub/commands.js', context);
-		this.template('sub/completions.js', 'sub/completions.js', context);
-		this.template('sub/example.js', 'sub/example.js', context);
-		this.template('sub/init.js', 'sub/init.js', context);
-		this.template('sub/version.js', 'sub/version.js', context);
+			['sub/help.js', 'sub/help.js'],
+			['sub/commands.js', 'sub/commands.js'],
+			['sub/completions.js', 'sub/completions.js'],
+			['sub/example.js', 'sub/example.js'],
+			['sub/init.js', 'sub/init.js'],
+			['sub/version.js', 'sub/version.js'],
+
+			['tests/lib/config.spec.js', 'tests/lib/config.spec.js'],
+			['tests/lib/persister.spec.js', 'tests/lib/persister.spec.js'],
+			['tests/lib/sub.spec.js', 'tests/lib/sub.spec.js'],
+
+			['tests/sub/commands.spec.js', 'tests/sub/commands.spec.js'],
+			['tests/sub/example.spec.js', 'tests/sub/example.spec.js'],
+			['tests/sub/version.spec.js', 'tests/sub/version.spec.js'],
+
+			['tests/fixtures/mockPersister.js', 'tests/fixtures/mockPersister.js'],
+			['tests/fixtures/spyLogger.js', 'tests/fixtures/spyLogger.js']
+		];
 		if (this.props.updater === 'git') {
-			this.template('sub/git-update.js', 'sub/update.js', context);
+			files.push(['sub/git-update.js', 'sub/update.js']);
 		} else {
-			this.template('sub/npm-update.js', 'sub/update.js', context);
+			files.push(['sub/npm-update.js', 'sub/update.js']);
 		}
-
-		this.template('tests/lib/config.spec.js', 'tests/lib/config.spec.js', context);
-		this.template('tests/lib/persister.spec.js', 'tests/lib/persister.spec.js', context);
-		this.template('tests/lib/sub.spec.js', 'tests/lib/sub.spec.js', context);
-
-		this.template('tests/sub/commands.spec.js', 'tests/sub/commands.spec.js', context);
-		this.template('tests/sub/example.spec.js', 'tests/sub/example.spec.js', context);
-		this.template('tests/sub/version.spec.js', 'tests/sub/version.spec.js', context);
-
-		this.template('tests/fixtures/mockPersister.js', 'tests/fixtures/mockPersister.js', context);
-		this.template('tests/fixtures/spyLogger.js', 'tests/fixtures/spyLogger.js', context);
-	},
+		files.forEach(pair => {
+			this.fs.copyTpl(
+				this.templatePath(pair[0]),
+				this.destinationPath(pair[1]),
+				context
+			);
+		});
+	}
 
 	install() {
 		this.installDependencies();
 	}
-});
+};
