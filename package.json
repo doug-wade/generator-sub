@@ -19,7 +19,7 @@
     "chalk": "^2.1.0",
     "inquirer": "^3.2.3",
     "yeoman-generator": "^2.0.0",
-    "yosay": "2.0.1"
+    "yosay": "2.0.2"
   },
   "devDependencies": {
     "ava": "^0.22.0",
