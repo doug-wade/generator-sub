@@ -145,5 +145,3 @@ And make sure to discuss new features in an issue before you send a pull request
 
 MIT © [Doug Wade](dougwade.io)
 
-# Support
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/~doug-wade/)
