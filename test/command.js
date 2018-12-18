@@ -3,7 +3,7 @@ import fs from 'fs';
 import helpers from 'yeoman-test';
 import test from 'ava';
 
-test(`generator-sub:command creates file`, async t => {
+test('generator-sub:command creates file', async t => {
 	let testDir;
 	await helpers.run(path.join(__dirname, '../generators/app'))
 		.inTmpDir(dir => {
@@ -20,7 +20,7 @@ function exists(filename, dir) {
 	try {
 		fs.accessSync(filename, fs.F_OK);
 		return true;
-	} catch (err) {
+	} catch (error) {
 		return false;
 	}
 }
