@@ -91,7 +91,7 @@ function exists(filename, dir) {
 	try {
 		fs.accessSync(filename, fs.F_OK);
 		return true;
-	} catch (err) {
+	} catch (error) {
 		return false;
 	}
 }
