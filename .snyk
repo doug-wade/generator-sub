@@ -1,9 +1,23 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.1
+version: v1.14.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:shelljs:20140723':
     - yeoman-generator > shelljs:
         reason: No other option
         expires: '2019-01-17T04:38:08.509Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - inquirer > lodash:
+        patched: '2020-05-01T23:52:31.319Z'
+    - yeoman-generator > lodash:
+        patched: '2020-05-01T23:52:31.319Z'
+    - yeoman-generator > async > lodash:
+        patched: '2020-05-01T23:52:31.319Z'
+    - yeoman-generator > yeoman-environment > lodash:
+        patched: '2020-05-01T23:52:31.319Z'
+    - yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T23:52:31.319Z'
+    - yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T23:52:31.319Z'
